@@ -3,6 +3,8 @@
 # waits to receive the compressed Cuckoo report analyses. In order for the OpenDXL Cuckoo Reporting Module
 # to broadcast the compressed Cuckoo report analyses, the "send_compressed_event" setting under the
 # "[dxleventreporting]" section of Cuckoo's reporting.conf file must be enabled.
+from __future__ import absolute_import
+from __future__ import print_function
 import json
 import logging
 import os
@@ -44,13 +46,13 @@ with DxlClient(config) as client:
             print("Cuckoo compressed report received: ")
 
             decompressed_event_dict = json.loads(decompressed_event_payload.decode(encoding="UTF-8"))
-            print json.dumps(decompressed_event_dict, sort_keys=True, indent=4, separators=(',', ': ')) + "\n"
+            print(json.dumps(decompressed_event_dict, sort_keys=True, indent=4, separators=(',', ': ')) + "\n")
 
     # Register the callback with the client
     client.add_event_callback(EVENT_TOPIC, CuckooCompressedReportEventCallback())
 
     # Wait until all events have been received
-    print "Waiting for Cuckoo compressed reports to be received..."
+    print("Waiting for Cuckoo compressed reports to be received...")
     while True:
         # Loop forever
         time.sleep(60)

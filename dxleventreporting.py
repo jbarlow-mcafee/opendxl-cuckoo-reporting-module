@@ -36,6 +36,7 @@ file under the "[dxleventreporting]" section in Cuckoo's report.conf file.
 For more information on the OpenDXL Python Client please see https://github.com/opendxl/opendxl-client-python/wiki.
 """
 
+from __future__ import absolute_import
 import calendar
 import datetime
 import json
@@ -51,6 +52,7 @@ from cuckoo.common.exceptions import CuckooReportError
 from dxlclient.client import DxlClient
 from dxlclient.client_config import DxlClientConfig
 from dxlclient.message import Event
+from functools import reduce
 
 # Logger
 log = logging.getLogger(__name__)
